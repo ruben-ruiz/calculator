@@ -1,0 +1,9 @@
+.grid-container {
+  display: grid; }
+
+.calculator__result {
+  grid-column: 1 / 5;
+  grid-row: 1; }
+
+.calculator__clear {
+  grid-column: 1 / 3; }
