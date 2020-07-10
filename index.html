@@ -5,31 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calculator</title>
         <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <form class="calc">
-            <button class="calc-result">BLANK</button>
+        <header class="heading">
+            <h1 class="heading-title">The Odin Calculator</h1>
+        </header>
+        <div class="calc">
+            <div class="calc-screen">
+                <div class="calc-screen__text" id="screen-top"></div>
+                <div class="calc-screen__text" id="screen-bottom"></div>
+            </div>
             <button class="calc-clear" type="reset">AC</button>
-            <button class="calc-backspace">BACKSPACE</button>
-            <button class="calc-divide">/</button>
-            <button class="calc-seven">7</button>
-            <button class="calc-eight">8</button>
-            <button class="calc-nine">9</button>
-            <button class="calc-multiply">X</button>
-            <button class="calc-four">4</button>
-            <button class="calc-three">5</button>
-            <button class="calc-six">6</button>
-            <button class="calc-subtract">-</button>
-            <button class="calc-one">1</button>
-            <button class="calc-two">2</button>
-            <button class="calc-three">3</button>
-            <button class="calc-add">+</button>
+            <button class="calc-delete">delete</button>
+            <button class="calc-percent">%</button>
+            <button class="calc-divide operands">/</button>
+            <button class="calc-seven digits">7</button>
+            <button class="calc-eight digits">8</button>
+            <button class="calc-nine digits">9</button>
+            <button class="calc-multiply operands">X</button>
+            <button class="calc-four digits">4</button>
+            <button class="calc-five digits">5</button>
+            <button class="calc-six digits">6</button>
+            <button class="calc-subtract operands">-</button>
+            <button class="calc-one digits">1</button>
+            <button class="calc-two digits">2</button>
+            <button class="calc-three digits">3</button>
+            <button class="calc-add operands">+</button>
             <button class="calc-sign">+/-</button>
-            <button class="calc-zero">0</button>
+            <button class="calc-zero digits">0</button>
             <button class="calc-decimal">.</button>
             <button class="calc-equals">=</button>
-        </form>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>

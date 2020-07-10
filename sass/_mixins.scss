@@ -13,6 +13,9 @@ $breakpoint arguement choices:
 - big-desktop
 
 1em = 16px
+
+height breakpoints:
+0 - 599px: change grid to flexible rows/columns.
 */
 
 @mixin respond($breakpoint) {
