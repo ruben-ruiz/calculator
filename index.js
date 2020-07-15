@@ -25,7 +25,6 @@ function operate(operator, a, b) {
     let operatorFunc = operand[operator];
     return window[operatorFunc](a,b);
 }
-var lastOperator = '';
 
 function display(e) {
     let arg = e.target.innerHTML;
@@ -60,7 +59,7 @@ function display(e) {
             } 
         } else if (lastCharTop == '=') {
             lastOperator = arg;
-        } else {
+        } else if (bottomDisplay !== '') {
             calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
             calcDisplayBottom.innerHTML = '';
         }
@@ -81,8 +80,6 @@ function display(e) {
     }
                  
     // if arg == calcEquals,
-    //     if there is an = as the last character,
-               
     //     if there is a operator as the last character,
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
     if (arg === "=") { 
@@ -110,67 +107,23 @@ function display(e) {
 
     // if arg == 'Delete',
     //     delete last character of bottom screen
-
-
-    // top display
-//     for(item in operandsArr) {
-//         if(operandsArr[item].innerHTML == arg) {
-//             operator = arg;
-//             if (reg.test(lastCharTop)) { // last char on top screen is operand
-//                 if (bottomDisplay !== '') { // bottom display has numbers and keystroke is operand, append to top screen and delete from bottom screen.
-//                     num2 = bottomDisplay;
-//                     calcDisplayTop.innerHTML += ` ${bottomDisplay} ${arg}`;
-//                     calcDisplayBottom.innerHTML = '';
-//                 } 
-//                 else if (topDisplay !== '') { calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg; } // top screen is not empty and ends with a operand, the keystroke registered is also an operand, let's replace it.
-//             } 
-//             else { // there is nothing on top screen, add bottom screen numbers and operand to top and clear bottom screen.
-//                 num1 = Number(bottomDisplay);
-//                 calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
-//                 calcDisplayBottom.innerHTML = '';
-//             }
-//         }
-//     }
-
-    
-
-//     if (num2 === 0 && calcDisplayBottom.innerHTML !== '') {
-//         num2 = Number(calcDisplayBottom.innerHTML);
-//     }
-//     else {
-//         num2 = Number(num2);
-//     }
-
-//     calcDisplayBottom.innerHTML = operate(operator, num1, num2);
-// }
-
-// function parseEquation()  {
-//     if (num2 === 0 && calcDisplayBottom.innerHTML !== '') {
-//         num2 = Number(calcDisplayBottom.innerHTML);
-//     }
-//     else {
-//         num2 = Number(num2);
-//     }
-
-//     calcDisplayBottom.innerHTML = operate(operator, num1, num2);
 }
 
-var calcEquals = document.querySelector('.calc-equals');
+let calcEquals = document.querySelector('.calc-equals');
 calcEquals.addEventListener('click', display);
 
-var num1 = 0;
-var num2 = 0;
-var operator = '';
+let lastOperator = '';
+let operator = '';
 
-var calcDisplayTop = document.querySelector('.screen-inner-top');
-var calcDisplayBottom = document.querySelector('.screen-inner-bottom');
+let calcDisplayTop = document.querySelector('.screen-inner-top');
+let calcDisplayBottom = document.querySelector('.screen-inner-bottom');
 
-var digits = document.querySelectorAll('.digits');
-var digitsArr = Array.from(digits);
+let digits = document.querySelectorAll('.digits');
+let digitsArr = Array.from(digits);
 digitsArr.forEach(btn => btn.addEventListener('click', display));
 
-var operands = document.querySelectorAll('.operands');
-var operandsArr = Array.from(operands);
+let operands = document.querySelectorAll('.operands');
+let operandsArr = Array.from(operands);
 operandsArr.forEach(btn => btn.addEventListener('click', display));
 
 
