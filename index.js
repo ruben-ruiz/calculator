@@ -116,6 +116,16 @@ function display(e) {
     }
     // if arg == 'DEL',
     //     delete last character of bottom screen
+    if (arg === 'DEL') {
+        if (lastCharTop !== '=') {
+            if (bottomDisplay == '' && topDisplay !== '') {
+                calcDisplayBottom.innerHTML = topDisplay.slice(0, -1).replace(/\s+/g, '');
+                calcDisplayTop.innerHTML = '';
+            } else {
+                calcDisplayBottom.innerHTML = bottomDisplay.slice(0, -1);
+            }
+        }
+    }
 }
 
 let calcEquals = document.querySelector('.calc-equals');
@@ -140,6 +150,9 @@ decimal.addEventListener('click', display);
 
 let clear = document.querySelector('.calc-clear');
 clear.addEventListener('click', display);
+
+let del = document.querySelector('.calc-delete');
+del.addEventListener('click', display);
 
 
 
