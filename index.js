@@ -57,7 +57,7 @@ function display(e) {
                 lastOperator = arg;
             } 
         } else if (lastCharTop == '=') {
-
+            lastOperator = arg;
         } else {
             calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
             calcDisplayBottom.innerHTML = '';
