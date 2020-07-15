@@ -56,8 +56,6 @@ function display(e) {
             if (bottomDisplay == '') {
                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
             } else { 
-                // numTop = Number(topDisplay.slice(0, -1));
-                // numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
                 calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
                 calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
                 lastOperator = arg;
@@ -89,8 +87,6 @@ function display(e) {
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
     if (arg === "=") { 
         if (reg.test(lastCharTop)) {
-            // numTop = Number(topDisplay.slice(0, -1));
-            // numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
             calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
             calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
         }
@@ -119,8 +115,6 @@ function display(e) {
         lastOperator = '';
         calcDisplayBottom.innerHTML = '';
         calcDisplayTop.innerHTML = '';
-        // numTop = 0;
-        // numBot = 0;
     }
     // if arg == 'DEL',
     //     delete last character of bottom screen
