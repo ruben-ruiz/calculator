@@ -101,11 +101,14 @@ function display(e) {
     // if arg == '.',
     //     if bottom screen contains a '.', do nothing
     //     else, add a '.' at end of bottom screen value
+    if (arg === '.' && !bottomDisplay.includes('.')) {
+        calcDisplayBottom.innerHTML += arg;
+    }
 
     // if arg == 'AC',
     //     Clear all variables and both screens
 
-    // if arg == 'Delete',
+    // if arg == 'DEL',
     //     delete last character of bottom screen
 }
 
@@ -125,6 +128,9 @@ digitsArr.forEach(btn => btn.addEventListener('click', display));
 let operands = document.querySelectorAll('.operands');
 let operandsArr = Array.from(operands);
 operandsArr.forEach(btn => btn.addEventListener('click', display));
+
+let decimal = document.querySelector('.calc-decimal');
+decimal.addEventListener('click', display);
 
 
 
