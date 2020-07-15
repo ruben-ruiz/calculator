@@ -25,6 +25,7 @@ function operate(operator, a, b) {
     let operatorFunc = operand[operator];
     return window[operatorFunc](a,b);
 }
+var lastOperator = '';
 
 function display(e) {
     let arg = e.target.innerHTML;
@@ -53,7 +54,10 @@ function display(e) {
                 num2 = Number(bottomDisplay);
                 calcDisplayTop.innerHTML = `${topDisplay} ${bottomDisplay} =`;
                 calcDisplayBottom.innerHTML = operate(lastCharTop, num1, num2);
+                lastOperator = arg;
             } 
+        } else if (lastCharTop == '=') {
+
         } else {
             calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
             calcDisplayBottom.innerHTML = '';
@@ -65,13 +69,25 @@ function display(e) {
     //     if bottom screen is blank,
     //         append numbers to bottom screen
     if (Number(arg) || arg == '0') {
-        calcDisplayBottom.innerHTML += arg;
+        if (lastCharTop == '=' && lastOperator !== '') {
+            calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
+            calcDisplayBottom.innerHTML = arg;
+            lastOperator = '';
+        } else {
+            calcDisplayBottom.innerHTML += arg;
+        }
     }
                  
     // if arg == calcEquals,
+    //     if there is an = as the last character,
+               
     //     if there is a operator as the last character,
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
-        
+    if (arg === "=") { 
+
+    }
+
+
     // if arg == '+/-',
     //     add/remove '-' in front of bottom screen value
     
