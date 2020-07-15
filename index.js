@@ -107,7 +107,13 @@ function display(e) {
 
     // if arg == 'AC',
     //     Clear all variables and both screens
-
+    if (arg === 'AC') {
+        lastOperator = '';
+        calcDisplayBottom.innerHTML = '';
+        calcDisplayTop.innerHTML = '';
+        numTop = 0;
+        numBot = 0;
+    }
     // if arg == 'DEL',
     //     delete last character of bottom screen
 }
@@ -131,6 +137,9 @@ operandsArr.forEach(btn => btn.addEventListener('click', display));
 
 let decimal = document.querySelector('.calc-decimal');
 decimal.addEventListener('click', display);
+
+let clear = document.querySelector('.calc-clear');
+clear.addEventListener('click', display);
 
 
 
