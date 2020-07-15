@@ -34,14 +34,16 @@ function display(e) {
     let topDisplayLength = topDisplay.length;
     let lastCharTop = topDisplay.charAt(topDisplayLength - 1);
     let reg = /[\+\-X\÷]/;
-    let operators = '+-X÷';
-
+    let numTop = 0;
+    let numBot = 0;
 
     // if arg == operator, 
     //     if there is a operator as the last character on top screen AND bottom screen is empty,
     //         replace it with the newly selected operator
     //     if there is a operator as the last character,
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
+    //     if there is an = as the last character,
+    //         store the arg as the new lastOperator
     //     else the top screen is empty,
     //         add bottom number screen and arg operator to the top screen
     //         clear display of bottom screen
@@ -50,10 +52,10 @@ function display(e) {
             if (bottomDisplay == '') {
                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
             } else { 
-                num1 = Number(topDisplay.slice(0, -1));
-                num2 = Number(bottomDisplay);
-                calcDisplayTop.innerHTML = `${topDisplay} ${bottomDisplay} =`;
-                calcDisplayBottom.innerHTML = operate(lastCharTop, num1, num2);
+                numTop = Number(topDisplay.slice(0, -1));
+                numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
+                calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
+                calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
                 lastOperator = arg;
             } 
         } else if (lastCharTop == '=') {
@@ -84,7 +86,12 @@ function display(e) {
     //     if there is a operator as the last character,
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
     if (arg === "=") { 
-
+        if (reg.test(lastCharTop)) {
+            numTop = Number(topDisplay.slice(0, -1));
+            numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
+            calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
+            calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
+        }
     }
 
 
