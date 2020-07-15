@@ -14,12 +14,17 @@ function divide(a, b) {
     return a / b;
 }
 
+function percentage(a) {
+    return a / 100;
+}
+
 function operate(operator, a, b) {
     let operand = {
      'X': 'multiply',
      '-': 'subtract',
      '÷': 'divide',
      '+': 'add',
+     '%': 'percentage',
     };
 
     let operatorFunc = operand[operator];
@@ -33,8 +38,8 @@ function display(e) {
     let topDisplayLength = topDisplay.length;
     let lastCharTop = topDisplay.charAt(topDisplayLength - 1);
     let reg = /[\+\-X\÷]/;
-    let numTop = 0;
-    let numBot = 0;
+    let numTop = (topDisplay == '') ? 0 : Number(topDisplay.slice(0, -1));
+    let numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
 
     // if arg == operator, 
     //     if there is a operator as the last character on top screen AND bottom screen is empty,
@@ -51,8 +56,8 @@ function display(e) {
             if (bottomDisplay == '') {
                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
             } else { 
-                numTop = Number(topDisplay.slice(0, -1));
-                numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
+                // numTop = Number(topDisplay.slice(0, -1));
+                // numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
                 calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
                 calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
                 lastOperator = arg;
@@ -84,8 +89,8 @@ function display(e) {
     //         perform calc on top screen and bottom screen values, put the equation on top screen with '=' at the end and answer on bottom screen
     if (arg === "=") { 
         if (reg.test(lastCharTop)) {
-            numTop = Number(topDisplay.slice(0, -1));
-            numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
+            // numTop = Number(topDisplay.slice(0, -1));
+            // numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
             calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
             calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
         }
@@ -97,6 +102,9 @@ function display(e) {
     
     // if arg == '%',
     //     calc bottom screen value by 100
+    if (arg === '%') {
+        calcDisplayBottom.innerHTML = operate(arg, numBot);
+    }
     
     // if arg == '.',
     //     if bottom screen contains a '.', do nothing
@@ -111,8 +119,8 @@ function display(e) {
         lastOperator = '';
         calcDisplayBottom.innerHTML = '';
         calcDisplayTop.innerHTML = '';
-        numTop = 0;
-        numBot = 0;
+        // numTop = 0;
+        // numBot = 0;
     }
     // if arg == 'DEL',
     //     delete last character of bottom screen
@@ -154,5 +162,6 @@ clear.addEventListener('click', display);
 let del = document.querySelector('.calc-delete');
 del.addEventListener('click', display);
 
-
+let percent = document.querySelector('.calc-percent');
+percent.addEventListener('click', display);
 
