@@ -55,14 +55,14 @@ function display(e) {
         if (reg.test(lastCharTop)) {
             if (bottomDisplay == '') {
                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
-            } else { 
+            } else if (bottomDisplay !== '.') { 
                 calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
                 calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
                 lastOperator = arg;
             } 
         } else if (lastCharTop == '=') {
             lastOperator = arg;
-        } else if (bottomDisplay !== '') {
+        } else if (bottomDisplay !== '' && bottomDisplay !== '.') {
             calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
             calcDisplayBottom.innerHTML = '';
         }
@@ -112,10 +112,15 @@ function display(e) {
     // if arg == '.',
     //     if bottom screen contains a '.', do nothing
     //     else, add a '.' at end of bottom screen value
-    if (arg === '.' && !bottomDisplay.includes('.')) {
-        calcDisplayBottom.innerHTML += arg;
+    if (arg === '.') {
+        if (lastCharTop == '=' && lastOperator !== '') {
+            calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
+            calcDisplayBottom.innerHTML = arg;
+            lastOperator = '';
+        } else if (!bottomDisplay.includes('.')) {
+            calcDisplayBottom.innerHTML += arg;
+        }
     }
-
     // if arg == 'AC',
     //     Clear all variables and both screens
     if (arg === 'AC') {
