@@ -11,7 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    if (b == 0) {
+        return `Not a Number`;
+    } else { return a / b; }
 }
 
 function percentage(a) {
@@ -92,7 +94,6 @@ function display(e) {
         }
     }
 
-
     // if arg == '+/-',
     //     add/remove '-' in front of bottom screen value
     if (arg === '+/-') {
@@ -110,6 +111,7 @@ function display(e) {
     } 
     
     // if arg == '.',
+    //     if last character on top is '=' and last operator is not empty, start new number sequence with . if chosen.
     //     if bottom screen contains a '.', do nothing
     //     else, add a '.' at end of bottom screen value
     if (arg === '.') {
