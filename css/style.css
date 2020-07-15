@@ -69,7 +69,7 @@ button {
   padding: 2rem;
   margin: 3vh auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(5rem, 1fr));
+  grid-template-columns: repeat(4, 5rem);
   grid-auto-rows: minmax(auto, 5.5rem);
   gap: .3rem; }
   .calc-screen {
@@ -78,16 +78,20 @@ button {
     border-radius: 1rem;
     background-color: white;
     margin-bottom: .5rem;
+    width: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
-    align-content: stretch;
-    align-items: stretch; }
+    align-items: flex-end; }
     .calc-screen__text {
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      text-align: left;
+      width: 100%;
       font-family: 'Oswald', sans-serif;
       font-weight: 400;
-      flex-grow: 1;
-      text-align: right;
+      flex: 1;
       padding: .5rem 1rem 0 0; }
   .calc > *:not(.calc-screen) {
     border-radius: 1rem;
@@ -100,3 +104,7 @@ button {
 #screen-bottom {
   font-size: 2rem;
   font-weight: 900; }
+
+.screen-inner-top,
+.screen-inner-bottom {
+  float: right; }
