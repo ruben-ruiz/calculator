@@ -51,7 +51,7 @@ function display(e) {
     //     else the top screen is empty,
     //         add bottom number screen and arg operator to the top screen
     //         clear display of bottom screen
-    if (reg.test(arg)) {
+    if (reg.test(arg) && arg !== '+/-') {
         if (reg.test(lastCharTop)) {
             if (bottomDisplay == '') {
                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
@@ -95,12 +95,19 @@ function display(e) {
 
     // if arg == '+/-',
     //     add/remove '-' in front of bottom screen value
+    if (arg === '+/-') {
+        if (bottomDisplay.includes('-')) {
+            calcDisplayBottom.innerHTML = bottomDisplay.slice(1);
+        } else {
+            calcDisplayBottom.innerHTML = '-' + bottomDisplay
+        }
+    }
     
     // if arg == '%',
     //     calc bottom screen value by 100
     if (arg === '%') {
         calcDisplayBottom.innerHTML = operate(arg, numBot);
-    }
+    } 
     
     // if arg == '.',
     //     if bottom screen contains a '.', do nothing
@@ -158,4 +165,7 @@ del.addEventListener('click', display);
 
 let percent = document.querySelector('.calc-percent');
 percent.addEventListener('click', display);
+
+let sign = document.querySelector('.calc-sign');
+sign.addEventListener('click', display);
 
