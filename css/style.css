@@ -127,7 +127,7 @@ button:hover {
 .screen-inner-bottom {
   float: right; }
 
-.operands,
+.operator,
 .calc-equals {
   background-color: orange; }
 
