@@ -34,27 +34,25 @@ function operate(operator, a, b) {
 }
 
 function numbers(e) {
-    if (Number(arg) || arg == '0') {
-        if (lastCharTop == '=' && lastOperator !== '') {
-            calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
-            calcDisplayBottom.innerHTML = arg;
-            lastOperator = '';
-        } else {
-            calcDisplayBottom.innerHTML += arg;
-        }
+    if (lastCharTop == '=' && lastOperator !== '') {
+        calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
+        calcDisplayBottom.innerHTML = e.target.innerHTML;
+        lastOperator = '';
+    } else {
+        calcDisplayBottom.innerHTML += e.target.innerHTML;
     }
 }
 
-function equals(e) {
-    if (arg === "=") { 
-        if (reg.test(lastCharTop)) {
-            calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
-            calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
-        }
+function equals(e) { 
+    let reg = /[\+\-x\÷]/;
+    if (reg.test(lastCharTop)) {
+        calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
+        calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
     }
 }
 
 function operators(e) {
+    arg = e.target.innerHTML;
     let reg = /[\+\-x\÷]/;
     if (reg.test(arg) && arg !== '+/-') {
         if (reg.test(lastCharTop)) {
@@ -90,15 +88,15 @@ function addSign(e) {
 function insertDecimal(e) {
     if (lastCharTop == '=' && lastOperator !== '') {
         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
-        calcDisplayBottom.innerHTML = arg;
+        calcDisplayBottom.innerHTML = e.target.innerHTML;
         lastOperator = '';
     } else if (!bottomDisplay.includes('.')) {
-        calcDisplayBottom.innerHTML += arg;
+        calcDisplayBottom.innerHTML += e.target.innerHTML;
     }
 }
 
 function doPercent(e) {
-    calcDisplayBottom.innerHTML = operate(arg, numBot);
+    calcDisplayBottom.innerHTML = operate(e.target.innerHTML, numBot);
 }
 
 function deleteChar(e) {
