@@ -38,4 +38,11 @@ body {
     min-height: 100vh;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-weight: 400;
+    background-image: 
+                    linear-gradient(to right bottom,
+                    rgba(#5188E0, .3),
+                    rgba(#194C9D, .8)),
+                    url(../images/background.jpg);
+    background-size: cover;
+    background-position: center;
 }

@@ -3,3 +3,13 @@ button {
     font-weight: 400;
     font-size: 2rem;
 }
+
+button:active {
+    transform: scale(.95);
+}
+
+button:hover {
+    border-color: #fff;
+    border-width: 5px;
+    border-style: solid;
+}

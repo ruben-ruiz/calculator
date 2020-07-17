@@ -47,37 +47,57 @@ html {
 body {
   min-height: 100vh;
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-weight: 400; }
+  font-weight: 400;
+  background-image: linear-gradient(to right bottom, rgba(81, 136, 224, 0.3), rgba(25, 76, 157, 0.8)), url(../images/background.jpg);
+  background-size: cover;
+  background-position: center; }
 
 button {
   font-family: 'Oswald', sans-serif;
   font-weight: 400;
   font-size: 2rem; }
 
-.heading {
-  margin-top: 5vh;
-  text-align: center;
-  font-size: 3rem; }
-  .heading-title {
-    text-align: center; }
+button:active {
+  transform: scale(0.95); }
+
+button:hover {
+  border-color: #fff;
+  border-width: 5px;
+  border-style: solid; }
 
 .calc {
   height: max-content;
   width: max-content;
-  background-color: var(--color-primary);
+  background-color: #3B3A3F;
+  box-shadow: 5px 10px 8px #5188E0;
   border-radius: 2.5rem;
   padding: 2rem;
-  margin: 3vh auto;
+  margin: 20vh auto auto auto;
   display: grid;
-  grid-template-columns: repeat(4, 5rem);
-  grid-auto-rows: minmax(auto, 5.5rem);
-  gap: .3rem; }
+  grid-template-columns: repeat(4, 10rem);
+  grid-template-rows: 2rem;
+  grid-auto-rows: minmax(auto, 8rem);
+  gap: .5rem; }
+  .calc-header {
+    grid-column: 1 / 5;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+    .calc-header__logo {
+      height: 2.5rem;
+      margin-bottom: .7rem; }
+    .calc-header__text {
+      margin-left: .5rem;
+      margin-right: auto; }
   .calc-screen {
     grid-column: 1 / 5;
-    height: 6rem;
+    height: 9rem;
     border-radius: 1rem;
-    background-color: white;
-    margin-bottom: .5rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -92,19 +112,46 @@ button {
       font-family: 'Oswald', sans-serif;
       font-weight: 400;
       flex: 1;
-      padding: .5rem 1rem 0 0; }
-  .calc > *:not(.calc-screen) {
+      padding-right: 1rem; }
+  .calc > *:not(.calc-screen):not(.calc-header) {
+    font-size: 3rem;
     border-radius: 1rem;
-    height: 5rem;
+    height: 8rem;
     outline: none; }
 
 #screen-top {
-  font-size: 1.2rem; }
+  font-size: 2rem; }
 
 #screen-bottom {
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: 900; }
 
 .screen-inner-top,
 .screen-inner-bottom {
   float: right; }
+
+.operands,
+.calc-equals {
+  background-color: orange; }
+
+.calc-clear,
+.calc-percent,
+.calc-delete,
+.calc-sign,
+.calc-decimal {
+  background-color: #3683db; }
+
+.digits {
+  background-color: #b1b5ae; }
+
+.author {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 1px 1px #000;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.github-logo {
+  margin-left: 1rem; }

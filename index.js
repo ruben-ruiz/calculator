@@ -22,7 +22,7 @@ function percentage(a) {
 
 function operate(operator, a, b) {
     let operand = {
-     'X': 'multiply',
+     'x': 'multiply',
      '-': 'subtract',
      '÷': 'divide',
      '+': 'add',
@@ -39,7 +39,7 @@ function display(e) {
     let bottomDisplay = calcDisplayBottom.innerHTML;
     let topDisplayLength = topDisplay.length;
     let lastCharTop = topDisplay.charAt(topDisplayLength - 1);
-    let reg = /[\+\-X\÷]/;
+    let reg = /[\+\-x\÷]/;
     let numTop = (topDisplay == '') ? 0 : Number(topDisplay.slice(0, -1));
     let numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
 
