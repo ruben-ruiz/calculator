@@ -33,6 +33,90 @@ function operate(operator, a, b) {
     return window[operatorFunc](a,b);
 }
 
+// function numbers(e) {
+//     if (Number(arg) || arg == '0') {
+//         if (lastCharTop == '=' && lastOperator !== '') {
+//             calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
+//             calcDisplayBottom.innerHTML = arg;
+//             lastOperator = '';
+//         } else {
+//             calcDisplayBottom.innerHTML += arg;
+//         }
+//     }
+// }
+
+// function equals(e) {
+//     if (arg === "=") { 
+//         if (reg.test(lastCharTop)) {
+//             calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
+//             calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
+//         }
+//     }
+// }
+
+// function operators(e) {
+//     if (reg.test(arg) && arg !== '+/-') {
+//         if (reg.test(lastCharTop)) {
+//             if (bottomDisplay == '') {
+//                 calcDisplayTop.innerHTML = topDisplay.slice(0, -1) + arg;
+//             } else if (bottomDisplay !== '.') { 
+//                 calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
+//                 calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
+//                 lastOperator = arg;
+//             } 
+//         } else if (lastCharTop == '=') {
+//             lastOperator = arg;
+//         } else if (bottomDisplay !== '' && bottomDisplay !== '.') {
+//             calcDisplayTop.innerHTML = `${bottomDisplay} ${arg}`;
+//             calcDisplayBottom.innerHTML = '';
+//         }
+//     }
+// }
+
+// function keyboard(e) {
+//     let keyDown = e.key;
+
+// }
+
+// function addSign(e) {
+//     if (bottomDisplay.includes('-')) {
+//         calcDisplayBottom.innerHTML = bottomDisplay.slice(1);
+//     } else {
+//         calcDisplayBottom.innerHTML = '-' + bottomDisplay
+//     }
+// }
+
+// function insertDecimal(e) {
+//     if (lastCharTop == '=' && lastOperator !== '') {
+//         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
+//         calcDisplayBottom.innerHTML = arg;
+//         lastOperator = '';
+//     } else if (!bottomDisplay.includes('.')) {
+//         calcDisplayBottom.innerHTML += arg;
+//     }
+// }
+
+// function doPercent(e) {
+//     calcDisplayBottom.innerHTML = operate(arg, numBot);
+// }
+
+// function deleteChar(e) {
+//     if (lastCharTop !== '=') {
+//         if (bottomDisplay == '' && topDisplay !== '') {
+//             calcDisplayBottom.innerHTML = topDisplay.slice(0, -1).replace(/\s+/g, '');
+//             calcDisplayTop.innerHTML = '';
+//         } else {
+//             calcDisplayBottom.innerHTML = bottomDisplay.slice(0, -1);
+//         }
+//     }
+// }
+
+// function allClear(e) {
+//     lastOperator = '';
+//     calcDisplayBottom.innerHTML = '';
+//     calcDisplayTop.innerHTML = '';
+// }
+
 function display(e) {
     let arg = e.target.innerHTML;
     let topDisplay = calcDisplayTop.innerHTML;
@@ -145,7 +229,7 @@ function display(e) {
 }
 
 let calcEquals = document.querySelector('.calc-equals');
-calcEquals.addEventListener('click', display);
+calcEquals.addEventListener('click', equals);
 
 let lastOperator = '';
 let operator = '';
@@ -155,24 +239,25 @@ let calcDisplayBottom = document.querySelector('.screen-inner-bottom');
 
 let digits = document.querySelectorAll('.digits');
 let digitsArr = Array.from(digits);
-digitsArr.forEach(btn => btn.addEventListener('click', display));
+digitsArr.forEach(btn => btn.addEventListener('click', numbers));
 
 let operands = document.querySelectorAll('.operands');
 let operandsArr = Array.from(operands);
-operandsArr.forEach(btn => btn.addEventListener('click', display));
+operandsArr.forEach(btn => btn.addEventListener('click', operators));
 
 let decimal = document.querySelector('.calc-decimal');
-decimal.addEventListener('click', display);
+decimal.addEventListener('click', insertDecimal);
 
 let clear = document.querySelector('.calc-clear');
-clear.addEventListener('click', display);
+clear.addEventListener('click', allClear);
 
 let del = document.querySelector('.calc-delete');
-del.addEventListener('click', display);
+del.addEventListener('click', deleteChar);
 
 let percent = document.querySelector('.calc-percent');
-percent.addEventListener('click', display);
+percent.addEventListener('click', doPercent);
 
 let sign = document.querySelector('.calc-sign');
-sign.addEventListener('click', display);
+sign.addEventListener('click', addSign);
 
+window.addEventListener('keydown', keyboard);
