@@ -21,7 +21,7 @@ function percentage(a) {
 }
 
 function operate(operator, a, b) {
-    let operators = {
+    let calcFunc = {
      'x': 'multiply',
      '-': 'subtract',
      '÷': 'divide',
@@ -29,22 +29,24 @@ function operate(operator, a, b) {
      '%': 'percentage',
     };
 
-    let operatorFunc = operators[operator];
+    let operatorFunc = calcFunc[operator];
     return window[operatorFunc](a,b);
 }
 
 function numbers(e) {
+    let arg = (/[0-9]/.test(e)) ? e : e.target.innerHTML;
+
     if (lastCharTop == '=' && lastOperator !== '') {
         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
-        calcDisplayBottom.innerHTML = e.target.innerHTML;
+        calcDisplayBottom.innerHTML = arg;
         lastOperator = '';
     } else {
-        calcDisplayBottom.innerHTML += e.target.innerHTML;
+        calcDisplayBottom.innerHTML += arg;
     }
 }
 
-function equals(e) { 
-    let reg = /[\+\-x\÷]/;
+function equals() {
+    let reg = /[\+\-x\÷]/; 
     if (reg.test(lastCharTop)) {
         calcDisplayTop.innerHTML = `${topDisplay} ${numBot} =`;
         calcDisplayBottom.innerHTML = operate(lastCharTop, numTop, numBot);
@@ -52,8 +54,9 @@ function equals(e) {
 }
 
 function operators(e) {
-    arg = e.target.innerHTML;
     let reg = /[\+\-x\÷]/;
+    let arg = (reg.test(e)) ? e : e.target.innerHTML;
+
     if (reg.test(arg) && arg !== '+/-') {
         if (reg.test(lastCharTop)) {
             if (bottomDisplay == '') {
@@ -73,11 +76,56 @@ function operators(e) {
 }
 
 function keyboard(e) {
-    let keyDown = e.key;
+    let key = e.key;
+    console.log(key);
+    let reg = /[\+\-xX\÷0-9\\\/\*=\.%]|Enter|Backspace|Delete/i;
 
+    switch (reg.test(key)) {
+        case key === "*":
+            operators("x");
+            break;
+        case key === "x":
+            operators(key);
+            break;
+        case key === "X":
+            operators("x");
+            break;
+        case key === "+":
+            operators(key);
+            break;
+        case key === "-":
+            operators(key);
+            break;
+        case key === "\\":
+            operators("÷");
+            break;
+        case key === "=":
+            equals();
+            break;
+        case key === "Enter":
+            equals();
+            break;
+        case key === ".":
+            insertDecimal(".");
+            break;
+        case key === "Backspace":
+            deleteChar();
+            break;
+        case key === "Delete":
+            allClear();
+            break;
+        case key === "%":
+            doPercent();
+            break;
+        case /[0-9]/.test(key):
+            numbers(key);
+            break;
+        default:
+            break;
+    }
 }
 
-function addSign(e) {
+function addSign() {
     if (bottomDisplay.includes('-')) {
         calcDisplayBottom.innerHTML = bottomDisplay.slice(1);
     } else {
@@ -86,20 +134,22 @@ function addSign(e) {
 }
 
 function insertDecimal(e) {
+    let arg = e.target.innerHTML || e;
     if (lastCharTop == '=' && lastOperator !== '') {
         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
-        calcDisplayBottom.innerHTML = e.target.innerHTML;
+        calcDisplayBottom.innerHTML = arg;
         lastOperator = '';
     } else if (!bottomDisplay.includes('.')) {
-        calcDisplayBottom.innerHTML += e.target.innerHTML;
+        calcDisplayBottom.innerHTML += arg;
     }
 }
 
 function doPercent(e) {
-    calcDisplayBottom.innerHTML = operate(e.target.innerHTML, numBot);
+    let arg = e.target.innerHTML || e;
+    calcDisplayBottom.innerHTML = operate(arg, numBot);
 }
 
-function deleteChar(e) {
+function deleteChar() {
     if (lastCharTop !== '=') {
         if (bottomDisplay == '' && topDisplay !== '') {
             calcDisplayBottom.innerHTML = topDisplay.slice(0, -1).replace(/\s+/g, '');
@@ -110,13 +160,13 @@ function deleteChar(e) {
     }
 }
 
-function allClear(e) {
+function allClear() {
     lastOperator = '';
     calcDisplayBottom.innerHTML = '';
     calcDisplayTop.innerHTML = '';
 }
 
-function display(e) {
+function display() {
     topDisplay = calcDisplayTop.innerHTML;
     bottomDisplay = calcDisplayBottom.innerHTML;
     topDisplayLength = topDisplay.length;
@@ -135,7 +185,8 @@ let numTop = (topDisplay == '') ? 0 : Number(topDisplay.slice(0, -1));
 let numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
 let lastOperator = '';
 
-window.addEventListener('click', display);
+document.addEventListener('click', display);
+document.addEventListener('keydown', keyboard);
 
 let calcEquals = document.querySelector('.calc-equals');
 calcEquals.addEventListener('click', equals);
@@ -162,5 +213,3 @@ percent.addEventListener('click', doPercent);
 
 let sign = document.querySelector('.calc-sign');
 sign.addEventListener('click', addSign);
-
-window.addEventListener('keydown', keyboard);
