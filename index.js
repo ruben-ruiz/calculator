@@ -35,10 +35,13 @@ function operate(operator, a, b) {
 function numbers(e) {
     let arg = (/[0-9]/.test(e)) ? e : e.target.innerHTML;
 
-    if (lastCharTop == '=' && lastOperator !== '') {
+    if (lastCharTop === '=' && lastOperator !== '') {
         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
         calcDisplayBottom.innerHTML = arg;
         lastOperator = '';
+    } else if (lastCharTop === '=' && lastOperator === '') {
+        allClear();
+        calcDisplayBottom.innerHTML = arg;
     } else {
         calcDisplayBottom.innerHTML += arg;
     }
@@ -76,7 +79,6 @@ function operators(e) {
 
 function keyboard(e) {
     let key = e.key;
-    console.log(key);
     let reg = /[\+\-xX\÷0-9\/\*=\.%]|Enter|Backspace|Delete|Shift/i;
 
     switch (reg.test(key)) {
@@ -86,7 +88,7 @@ function keyboard(e) {
             operators("x");
             break;
         case key === "x":
-            operators(key);
+            operators(key);12
             break;
         case key === "X":
             operators("x");
