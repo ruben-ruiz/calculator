@@ -77,10 +77,11 @@ function operators(e) {
 
 function keyboard(e) {
     let key = e.key;
-    console.log(key);
-    let reg = /[\+\-xX\÷0-9\\\/\*=\.%]|Enter|Backspace|Delete/i;
+    let reg = /[\+\-xX\÷0-9\\\/\*=\.%]|Enter|Backspace|Delete|Shift/i;
 
     switch (reg.test(key)) {
+        case key === "Shift":
+            break;
         case key === "*":
             operators("x");
             break;
@@ -186,6 +187,7 @@ let numBot = (bottomDisplay == '') ? 0 : Number(bottomDisplay);
 let lastOperator = '';
 
 document.addEventListener('click', display);
+document.addEventListener('keydown', display);
 document.addEventListener('keydown', keyboard);
 
 let calcEquals = document.querySelector('.calc-equals');
