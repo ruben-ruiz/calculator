@@ -16,8 +16,8 @@ function divide(a, b) {
     } else { return a / b; }
 }
 
-function percentage(a) {
-    return a / 100;
+function percentage() {
+    calcDisplayBottom.innerHTML = numBot / 100;
 }
 
 function operate(operator, a, b) {
@@ -26,7 +26,6 @@ function operate(operator, a, b) {
      '-': 'subtract',
      '÷': 'divide',
      '+': 'add',
-     '%': 'percentage',
     };
 
     let operatorFunc = calcFunc[operator];
@@ -77,6 +76,7 @@ function operators(e) {
 
 function keyboard(e) {
     let key = e.key;
+    console.log(key);
     let reg = /[\+\-xX\÷0-9\\\/\*=\.%]|Enter|Backspace|Delete|Shift/i;
 
     switch (reg.test(key)) {
@@ -116,7 +116,7 @@ function keyboard(e) {
             allClear();
             break;
         case key === "%":
-            doPercent();
+            percentage();
             break;
         case /[0-9]/.test(key):
             numbers(key);
@@ -143,11 +143,6 @@ function insertDecimal(e) {
     } else if (!bottomDisplay.includes('.')) {
         calcDisplayBottom.innerHTML += arg;
     }
-}
-
-function doPercent(e) {
-    let arg = e.target.innerHTML || e;
-    calcDisplayBottom.innerHTML = operate(arg, numBot);
 }
 
 function deleteChar() {
@@ -211,7 +206,7 @@ let del = document.querySelector('.calc-delete');
 del.addEventListener('click', deleteChar);
 
 let percent = document.querySelector('.calc-percent');
-percent.addEventListener('click', doPercent);
+percent.addEventListener('click', percentage);
 
 let sign = document.querySelector('.calc-sign');
 sign.addEventListener('click', addSign);
