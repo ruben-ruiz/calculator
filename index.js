@@ -77,7 +77,7 @@ function operators(e) {
 function keyboard(e) {
     let key = e.key;
     console.log(key);
-    let reg = /[\+\-xX\÷0-9\\\/\*=\.%]|Enter|Backspace|Delete|Shift/i;
+    let reg = /[\+\-xX\÷0-9\/\*=\.%]|Enter|Backspace|Delete|Shift/i;
 
     switch (reg.test(key)) {
         case key === "Shift":
@@ -97,7 +97,7 @@ function keyboard(e) {
         case key === "-":
             operators(key);
             break;
-        case key === "\\":
+        case key === "\/":
             operators("÷");
             break;
         case key === "=":
@@ -107,7 +107,7 @@ function keyboard(e) {
             equals();
             break;
         case key === ".":
-            insertDecimal(".");
+            insertDecimal();
             break;
         case key === "Backspace":
             deleteChar();
@@ -134,8 +134,8 @@ function addSign() {
     }
 }
 
-function insertDecimal(e) {
-    let arg = e.target.innerHTML || e;
+function insertDecimal() {
+    let arg = '.'
     if (lastCharTop == '=' && lastOperator !== '') {
         calcDisplayTop.innerHTML = `${bottomDisplay} ${lastOperator}`;
         calcDisplayBottom.innerHTML = arg;
